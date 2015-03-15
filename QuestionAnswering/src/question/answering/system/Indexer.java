@@ -2,23 +2,32 @@ package question.answering.system;
 
 import java.io.*;
 
-import org.apache.lucene.analysis.standard.StandardAnalyzer;
+import javax.swing.JTextArea;
+
+import org.apache.lucene.analysis.id.IndonesianAnalyzer;
 import org.apache.lucene.document.Document;
 import org.apache.lucene.document.Field;
 import org.apache.lucene.index.CorruptIndexException;
 import org.apache.lucene.index.IndexWriter;
+import org.apache.lucene.index.IndexWriterConfig;
 import org.apache.lucene.store.Directory;
 import org.apache.lucene.store.FSDirectory;
 import org.apache.lucene.util.Version;
 
 
 public class Indexer {
+	private JTextArea textArea;
 	private IndexWriter writer;
 	
-	public Indexer(String indexDirectoryPath) throws IOException
+	public Indexer(JTextArea textArea, String indexDirectoryPath) throws IOException
 	{
+		
+		this.textArea = textArea;
 		Directory indexDirectory = FSDirectory.open(new File(indexDirectoryPath));
-		writer = new IndexWriter(indexDirectory,new StandardAnalyzer(Version.LUCENE_36),true,IndexWriter.MaxFieldLength.UNLIMITED);
+	    IndonesianAnalyzer analyzer = new IndonesianAnalyzer(Version.LUCENE_36);
+	    IndexWriterConfig config = new IndexWriterConfig(Version.LUCENE_36, analyzer);
+		writer = new IndexWriter(indexDirectory,config);
+		
 	}
 	public void close() throws CorruptIndexException, IOException
 	{
@@ -36,8 +45,8 @@ public class Indexer {
 		return document;
 		
 	}
-	private void indexFile(File file) throws IOException{
-		System.out.println("Indexing "+file.getCanonicalPath());
+	public void indexFile(File file) throws IOException{
+		textArea.append("Indexing "+file.getCanonicalPath()+"\n");
 		Document document = getDocument(file);
 		writer.addDocument(document);
 	}
