@@ -119,7 +119,7 @@ public class MainWindow {
 		textArea.append(hits.totalHits + " documents found. Time: "+(endTime - startTime)+"\n");
 		for(ScoreDoc scoreDoc : hits.scoreDocs){
 			Document doc = searcher.getDocument(scoreDoc);
-			textArea.append("File: "+doc.get(LuceneConstants.FILE_PATH)+"\n");
+			textArea.append("File: "+doc.get("filepath")+"\n");
 		}
 	}
 	public void createIndex() throws IOException{

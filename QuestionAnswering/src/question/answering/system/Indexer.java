@@ -36,9 +36,9 @@ public class Indexer {
 	private Document getDocument(File file) throws IOException
 	{
 		Document document = new Document();
-		Field contentField = new Field(LuceneConstants.CONTENTS,new FileReader(file));
-		Field fileNameField = new Field(LuceneConstants.FILE_NAME,file.getName(),Field.Store.YES,Field.Index.NOT_ANALYZED);
-		Field filePathField = new Field(LuceneConstants.FILE_PATH,file.getCanonicalPath(),Field.Store.YES,Field.Index.NOT_ANALYZED);
+		Field contentField = new Field("contents",new FileReader(file),Field.TermVector.YES);
+		Field fileNameField = new Field("filename",file.getName(),Field.Store.YES,Field.Index.NOT_ANALYZED,Field.TermVector.YES);
+		Field filePathField = new Field("filepath",file.getCanonicalPath(),Field.Store.YES,Field.Index.NOT_ANALYZED,Field.TermVector.YES);
 		document.add(contentField);
 		document.add(fileNameField);
 		document.add(filePathField);
