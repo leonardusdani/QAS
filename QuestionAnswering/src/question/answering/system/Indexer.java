@@ -25,7 +25,8 @@ public class Indexer {
 		this.textArea = textArea;
 		Directory indexDirectory = FSDirectory.open(new File(indexDirectoryPath));
 	    IndonesianAnalyzer analyzer = new IndonesianAnalyzer(Version.LUCENE_36);
-	    IndexWriterConfig config = new IndexWriterConfig(Version.LUCENE_36, analyzer);
+		//StandardAnalyzer analyzer = new StandardAnalyzer(Version.LUCENE_36);
+	    IndexWriterConfig config = new IndexWriterConfig(Version.LUCENE_36,analyzer);
 		writer = new IndexWriter(indexDirectory,config);
 		
 	}

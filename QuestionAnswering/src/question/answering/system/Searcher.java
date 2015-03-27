@@ -37,7 +37,7 @@ public class Searcher {
 		query = queryParser.parse(searchQuery);
 		System.out.println(query);
 		DiceSimilarity diceSimilarity = new DiceSimilarity(query);
-		return indexSearcher.search(diceSimilarity, 10);
+		return indexSearcher.search(diceSimilarity, 100);
 	}
 	public Document getDocument(ScoreDoc scoreDoc) throws CorruptIndexException,IOException{
 		Explanation explanation = indexSearcher.explain(query, scoreDoc.doc);
