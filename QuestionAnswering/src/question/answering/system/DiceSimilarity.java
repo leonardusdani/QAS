@@ -21,14 +21,10 @@ public class DiceSimilarity extends CustomScoreQuery{
 	public CustomScoreProvider getCustomScoreProvider(final IndexReader reader){
 		return new CustomScoreProvider(reader){
 			public float customScore(int doc,float subQueryScore,float valSrcScore) throws IOException{
-				System.out.println(doc);
 				TermFreqVector freqVector = reader.getTermFreqVector(doc, "contents");
 				TermFreqVector freqVector1 = reader.getTermFreqVector(doc, "filename");
 				int freqs[] = freqVector.getTermFrequencies();
-				System.out.println(freqVector.toString());
-				
 				Set<Term> terms = new HashSet<>();
-				
 				query.extractTerms(terms);
 				System.out.println(terms.toString());
 				float dice=0;
@@ -38,7 +34,6 @@ public class DiceSimilarity extends CustomScoreQuery{
 				for(Term term : terms){
 					lengthQuery++;
 					int index = freqVector.indexOf(term.text());
-					//System.out.println("index: " + index);
 					if(index != -1){
 						total += freqs[index];
 					}
@@ -47,13 +42,12 @@ public class DiceSimilarity extends CustomScoreQuery{
 					lengthDoc += freqq;
 				}
 				System.out.println("filename : " + freqVector1.toString());
-				System.out.println("doc: " + lengthDoc);
-				System.out.println("query: " + lengthQuery);
-				System.out.println("total: " + total);
-				dice = total/(lengthDoc+lengthQuery);
-				System.out.println("Total beroo: " + dice);
+				System.out.println("terms in doc: " + lengthDoc);
+				System.out.println("terms in query: " + lengthQuery);
+				System.out.println("terms in doc and query: " + total);
+				dice = (2*total)/(lengthDoc+lengthQuery);
+				System.out.println("Similarity: " + dice);
 				return dice;
-				
 			}
 		};
 	}

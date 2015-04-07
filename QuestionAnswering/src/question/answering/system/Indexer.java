@@ -1,8 +1,7 @@
 package question.answering.system;
 
 import java.io.*;
-
-import javax.swing.JTextArea;
+import java.util.Observable;
 
 import org.apache.lucene.analysis.id.IndonesianAnalyzer;
 import org.apache.lucene.document.Document;
@@ -15,17 +14,19 @@ import org.apache.lucene.store.FSDirectory;
 import org.apache.lucene.util.Version;
 
 
-public class Indexer {
-	private JTextArea textArea;
+public class Indexer extends Observable {
 	private IndexWriter writer;
+	private String filePath;
 	
-	public Indexer(JTextArea textArea, String indexDirectoryPath) throws IOException
+	public void displayChanged(){
+		setChanged();
+		notifyObservers();
+	}
+	
+	public Indexer(String indexDirectoryPath) throws IOException
 	{
-		
-		this.textArea = textArea;
 		Directory indexDirectory = FSDirectory.open(new File(indexDirectoryPath));
 	    IndonesianAnalyzer analyzer = new IndonesianAnalyzer(Version.LUCENE_36);
-		//StandardAnalyzer analyzer = new StandardAnalyzer(Version.LUCENE_36);
 	    IndexWriterConfig config = new IndexWriterConfig(Version.LUCENE_36,analyzer);
 		writer = new IndexWriter(indexDirectory,config);
 		
@@ -46,12 +47,18 @@ public class Indexer {
 		return document;
 		
 	}
-	public void indexFile(File file) throws IOException{
-		textArea.append("Indexing "+file.getCanonicalPath()+"\n");
+	
+	public String getFilePath(){
+		return filePath;
+	}
+	
+	public void indexFile(File file) throws IOException, InterruptedException{
+		filePath = file.getCanonicalPath();
+		displayChanged();
 		Document document = getDocument(file);
 		writer.addDocument(document);
 	}
-	public int createIndex(String dataDirPath, FileFilter filter) throws IOException{
+	public int createIndex(String dataDirPath, FileFilter filter) throws IOException, InterruptedException{
 		File[] files = new File(dataDirPath).listFiles();
 		for(File file :files){
 			if(!file.isDirectory()
@@ -61,6 +68,7 @@ public class Indexer {
 				&& filter.accept(file))
 				{
 					indexFile(file);
+					
 				}
 		}
 		return writer.numDocs();
