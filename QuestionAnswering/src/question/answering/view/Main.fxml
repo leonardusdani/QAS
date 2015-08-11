@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.chart.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.paint.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane fx:id="root" minHeight="-Infinity" minWidth="-Infinity" prefHeight="670.0" prefWidth="1024.0" styleClass="anchorpane" stylesheets="@Style.css" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1" fx:controller="question.answering.controller.MainController">
+   <children>
+      <Label fx:id="labelAnswer" prefHeight="53.0" prefWidth="748.0" visible="false" wrapText="true">
+         <font>
+            <Font name="Times New Roman" size="14.0" />
+         </font>
+      </Label>
+      <Label layoutX="441.0" layoutY="38.0" prefHeight="59.0" prefWidth="87.0" text="Q&amp;A" textFill="#752a07">
+         <font>
+            <Font name="AngsanaUPC Bold" size="56.0" />
+         </font>
+      </Label>
+      <TableView fx:id="tableAnswer" layoutX="38.0" layoutY="181.0" prefHeight="380.0" prefWidth="946.0">
+        <columns>
+          <TableColumn fx:id="columnRank" prefWidth="54.0" text="Ranking" />
+          <TableColumn fx:id="columnContent" prefWidth="920.0" text="Jawaban" />
+        </columns>
+      </TableView>
+      <Button fx:id="btnLog" layoutX="798.0" layoutY="572.0" mnemonicParsing="false" onAction="#log" text="Lihat log" />
+      <Button fx:id="btnChart" layoutX="894.0" layoutY="572.0" mnemonicParsing="false" onAction="#chart" text="Grafik" />
+      <Button fx:id="btnAnswer" layoutX="842.0" layoutY="104.0" mnemonicParsing="false" onAction="#answer" prefHeight="25.0" prefWidth="103.0" text="Cari Jawaban" />
+      <Button fx:id="btnHome" layoutX="12.0" layoutY="37.0" mnemonicParsing="false" onAction="#info" prefHeight="66.0" prefWidth="64.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#a1be95" height="29.0" stroke="TRANSPARENT" strokeType="INSIDE" width="1024.0" />
+      <TextField fx:id="textFieldClient" layoutX="114.0" layoutY="104.0" prefHeight="25.0" prefWidth="716.0" promptText="masukkan pertanyaan anda disini" />
+      <Label layoutX="400.0" prefHeight="29.0" prefWidth="280.0" text="Question Answering System" textFill="WHITE">
+         <font>
+            <Font name="Levenim MT" size="18.0" />
+         </font>
+      </Label>
+      <Button fx:id="btnClose" layoutX="990.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#close" prefHeight="29.0" prefWidth="34.0" styleClass="btnClose" />
+      <Button fx:id="btnSetting" layoutX="956.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#goToSettings" prefHeight="29.0" prefWidth="34.0" />
+      <CheckBox fx:id="checkBox" layoutX="114.0" layoutY="136.0" mnemonicParsing="false" text="Wordnet" />
+      <ProgressIndicator fx:id="pgi" layoutX="435.0" layoutY="345.0" opacity="0.0" prefHeight="104.0" prefWidth="146.0" progress="0.0" />
+   </children>
+</AnchorPane>
