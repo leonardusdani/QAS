@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
 	<classpathentry kind="src" path="src"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.7"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8"/>
 	<classpathentry kind="lib" path="C:/Users/Dani/Desktop/lucene/lucene-3.6.2/lucene-3.6.2/lucene-core-3.6.2.jar"/>
 	<classpathentry kind="lib" path="C:/Users/Dani/Desktop/lucene/lucene-3.6.2/lucene-3.6.2/contrib/analyzers/common/lucene-analyzers-3.6.2.jar"/>
 	<classpathentry kind="lib" path="C:/Users/Dani/Desktop/lucene/commons-io-2.4/commons-io-2.4.jar"/>
+	<classpathentry kind="con" path="org.eclipse.fx.ide.jdt.core.JAVAFX_CONTAINER"/>
+	<classpathentry kind="lib" path="C:/Users/Dani/Desktop/lucene/sqlite-jdbc-3.8.7.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
